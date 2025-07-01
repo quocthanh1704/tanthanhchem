@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hoá Học Thú Vị</title>
   <style>
     body {
@@ -32,7 +32,7 @@
       padding: 20px;
       flex: 1;
       min-width: 250px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     .box h2 {
@@ -43,30 +43,74 @@
     ul {
       list-style-type: none;
       padding-left: 0;
+      margin: 0;
     }
 
     li {
       padding: 8px 0;
       border-bottom: 1px solid #eee;
+      cursor: pointer;
     }
 
     li:last-child {
       border-bottom: none;
+    }
+
+    .subtopics {
+      margin-top: 10px;
+      margin-left: 15px;
+      padding-left: 10px;
+      border-left: 2px solid #ddd;
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .subtopics li {
+      font-size: 14px;
+      color: #333;
+      border-bottom: none;
+      padding: 4px 0;
+      cursor: default;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    a {
+      color: #2980b9;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <h1>Hoá Học Thú Vị</h1>
   <div class="container">
+    <!-- HÓA HỌC 10 -->
     <div class="box">
       <h2>Hoá Học 10</h2>
       <ul>
-        <li>Lí thuyết</li>
+        <li onclick="toggleSubtopics()">Lí thuyết</li>
+        <ul class="subtopics" id="lythuyet10">
+          <li>Nguyên tử</li>
+          <li>Bảng tuần hoàn</li>
+          <li>Liên kết hoá học</li>
+          <li>Năng lượng hoá học</li>
+          <li>Tốc độ phản ứng</li>
+          <li>Halogen</li>
+        </ul>
         <li>Trắc nghiệm nhiều lựa chọn</li>
         <li>Trắc nghiệm đúng sai</li>
         <li>Trắc nghiệm trả lời ngắn</li>
       </ul>
     </div>
+
+    <!-- HÓA HỌC 11 -->
     <div class="box">
       <h2>Hoá Học 11</h2>
       <ul>
@@ -76,6 +120,8 @@
         <li>Trắc nghiệm trả lời ngắn</li>
       </ul>
     </div>
+
+    <!-- HÓA HỌC 12 -->
     <div class="box">
       <h2>Hoá Học 12</h2>
       <ul>
@@ -86,5 +132,12 @@
       </ul>
     </div>
   </div>
+
+  <script>
+    function toggleSubtopics() {
+      const list = document.getElementById("lythuyet10");
+      list.style.display = (list.style.display === "block") ? "none" : "block";
+    }
+  </script>
 </body>
 </html>
