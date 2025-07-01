@@ -7,95 +7,78 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f9f9f9;
       margin: 0;
-      padding: 20px;
+      padding: 0;
+      background: #f4f4f4;
     }
 
     h1 {
       text-align: center;
-      color: #2c3e50;
-      margin-bottom: 40px;
-    }
-
-    .container {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .box {
-      background: #ffffff;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 20px;
-      flex: 1;
-      min-width: 250px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .box h2 {
-      color: #2980b9;
-      margin-top: 0;
-    }
-
-    ul {
-      list-style-type: none;
-      padding-left: 0;
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px 0;
       margin: 0;
     }
 
-    li {
-      padding: 8px 0;
-      border-bottom: 1px solid #eee;
+    .main {
+      display: flex;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .sidebar {
+      flex: 3;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .content {
+      flex: 7;
+      background: #eaeaea;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+    }
+
+    .menu-item {
+      margin-bottom: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #2980b9;
+    }
+
+    .submenu, .subtopics {
+      margin-left: 20px;
+      margin-top: 5px;
+      display: none;
+    }
+
+    .submenu li, .subtopics li {
+      padding: 4px 0;
+      list-style: disc;
+      color: #333;
+      font-weight: normal;
       cursor: pointer;
     }
 
-    li:last-child {
-      border-bottom: none;
-    }
-
-    .subtopics {
-      margin-top: 10px;
-      margin-left: 15px;
-      padding-left: 10px;
-      border-left: 2px solid #ddd;
-      display: none;
-      animation: fadeIn 0.3s ease-in-out;
-    }
-
-    .subtopics li {
-      font-size: 14px;
-      color: #333;
-      border-bottom: none;
-      padding: 4px 0;
-      cursor: default;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    a {
+    .submenu li:hover, .subtopics li:hover {
       color: #2980b9;
-      text-decoration: none;
-    }
-
-    a:hover {
       text-decoration: underline;
     }
+
   </style>
 </head>
 <body>
   <h1>Hoá Học Thú Vị</h1>
-  <div class="container">
-    <!-- HÓA HỌC 10 -->
-    <div class="box">
-      <h2>Hoá Học 10</h2>
-      <ul>
-        <li onclick="toggleSubtopics()">Lí thuyết</li>
+
+  <div class="main">
+    <!-- Sidebar trái -->
+    <div class="sidebar">
+      <div class="menu-item" onclick="toggleMenu('menu10')">Hoá Học 10</div>
+      <ul class="submenu" id="menu10">
+        <li onclick="toggleSubtopics('lythuyet10')">Lí thuyết</li>
         <ul class="subtopics" id="lythuyet10">
           <li>Nguyên tử</li>
           <li>Bảng tuần hoàn</li>
@@ -108,12 +91,17 @@
         <li>Trắc nghiệm đúng sai</li>
         <li>Trắc nghiệm trả lời ngắn</li>
       </ul>
-    </div>
 
-    <!-- HÓA HỌC 11 -->
-    <div class="box">
-      <h2>Hoá Học 11</h2>
-      <ul>
+      <div class="menu-item" onclick="toggleMenu('menu11')">Hoá Học 11</div>
+      <ul class="submenu" id="menu11">
+        <li>Lí thuyết</li>
+        <li>Trắc nghiệm nhiều lựa chọn</li>
+        <li>Trắc nghiệm đúng sai</li>
+        <li>Trắc nghiệm trả lời ngắn</li>
+      </ul>
+
+      <div class="menu-item" onclick="toggleMenu('menu12')">Hoá Học 12</div>
+      <ul class="submenu" id="menu12">
         <li>Lí thuyết</li>
         <li>Trắc nghiệm nhiều lựa chọn</li>
         <li>Trắc nghiệm đúng sai</li>
@@ -121,22 +109,27 @@
       </ul>
     </div>
 
-    <!-- HÓA HỌC 12 -->
-    <div class="box">
-      <h2>Hoá Học 12</h2>
-      <ul>
-        <li>Lí thuyết</li>
-        <li>Trắc nghiệm nhiều lựa chọn</li>
-        <li>Trắc nghiệm đúng sai</li>
-        <li>Trắc nghiệm trả lời ngắn</li>
-      </ul>
+    <!-- Nội dung bên phải -->
+    <div class="content">
+      <p>Chào mừng bạn đến với thế giới Hoá học thú vị. Hãy chọn lớp học và chủ đề bên trái để bắt đầu.</p>
     </div>
   </div>
 
   <script>
-    function toggleSubtopics() {
-      const list = document.getElementById("lythuyet10");
-      list.style.display = (list.style.display === "block") ? "none" : "block";
+    function toggleMenu(id) {
+      const menus = document.querySelectorAll(".submenu");
+      menus.forEach(menu => {
+        if (menu.id !== id) {
+          menu.style.display = "none";
+        }
+      });
+      const el = document.getElementById(id);
+      el.style.display = (el.style.display === "block") ? "none" : "block";
+    }
+
+    function toggleSubtopics(id) {
+      const el = document.getElementById(id);
+      el.style.display = (el.style.display === "block") ? "none" : "block";
     }
   </script>
 </body>
