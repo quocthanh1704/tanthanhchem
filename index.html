@@ -1,136 +1,68 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hoá Học Thú Vị</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f4f4f4;
-    }
-
-    h1 {
-      text-align: center;
-      background-color: #2c3e50;
-      color: white;
-      padding: 20px 0;
-      margin: 0;
-    }
-
-    .main {
-      display: flex;
-      padding: 20px;
-      gap: 20px;
-    }
-
-    .sidebar {
-      flex: 3;
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    .content {
-      flex: 7;
-      background: #eaeaea;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
-    }
-
-    .menu-item {
-      margin-bottom: 10px;
-      cursor: pointer;
-      font-weight: bold;
-      color: #2980b9;
-    }
-
-    .submenu, .subtopics {
-      margin-left: 20px;
-      margin-top: 5px;
-      display: none;
-    }
-
-    .submenu li, .subtopics li {
-      padding: 4px 0;
-      list-style: disc;
-      color: #333;
-      font-weight: normal;
-      cursor: pointer;
-    }
-
-    .submenu li:hover, .subtopics li:hover {
-      color: #2980b9;
-      text-decoration: underline;
-    }
-
-  </style>
+    <meta charset="UTF-8">
+    <title>Tải tài liệu Word</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .box {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            width: 350px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        input[type="file"] {
+            width: 100%;
+            margin: 15px 0;
+        }
+        .info {
+            font-size: 14px;
+            color: #333;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-  <h1>Hoá Học Thú Vị</h1>
 
-  <div class="main">
-    <!-- Sidebar trái -->
-    <div class="sidebar">
-      <div class="menu-item" onclick="toggleMenu('menu10')">Hoá Học 10</div>
-      <ul class="submenu" id="menu10">
-        <li onclick="toggleSubtopics('lythuyet10')">Lí thuyết</li>
-        <ul class="subtopics" id="lythuyet10">
-          <li>Nguyên tử</li>
-          <li>Bảng tuần hoàn</li>
-          <li>Liên kết hoá học</li>
-          <li>Năng lượng hoá học</li>
-          <li>Tốc độ phản ứng</li>
-          <li>Halogen</li>
-        </ul>
-        <li>Trắc nghiệm nhiều lựa chọn</li>
-        <li>Trắc nghiệm đúng sai</li>
-        <li>Trắc nghiệm trả lời ngắn</li>
-      </ul>
+<div class="box">
+    <h2>Tải lên file Word</h2>
 
-      <div class="menu-item" onclick="toggleMenu('menu11')">Hoá Học 11</div>
-      <ul class="submenu" id="menu11">
-        <li>Lí thuyết</li>
-        <li>Trắc nghiệm nhiều lựa chọn</li>
-        <li>Trắc nghiệm đúng sai</li>
-        <li>Trắc nghiệm trả lời ngắn</li>
-      </ul>
+    <input 
+        type="file" 
+        id="wordFile" 
+        accept=".doc,.docx"
+    >
 
-      <div class="menu-item" onclick="toggleMenu('menu12')">Hoá Học 12</div>
-      <ul class="submenu" id="menu12">
-        <li>Lí thuyết</li>
-        <li>Trắc nghiệm nhiều lựa chọn</li>
-        <li>Trắc nghiệm đúng sai</li>
-        <li>Trắc nghiệm trả lời ngắn</li>
-      </ul>
-    </div>
+    <div class="info" id="fileInfo"></div>
+</div>
 
-    <!-- Nội dung bên phải -->
-    <div class="content">
-      <p>Chào mừng bạn đến với thế giới Hoá học thú vị. Hãy chọn lớp học và chủ đề bên trái để bắt đầu.</p>
-    </div>
-  </div>
+<script>
+    const input = document.getElementById("wordFile");
+    const info = document.getElementById("fileInfo");
 
-  <script>
-    function toggleMenu(id) {
-      const menus = document.querySelectorAll(".submenu");
-      menus.forEach(menu => {
-        if (menu.id !== id) {
-          menu.style.display = "none";
-        }
-      });
-      const el = document.getElementById(id);
-      el.style.display = (el.style.display === "block") ? "none" : "block";
-    }
+    input.addEventListener("change", function () {
+        if (this.files.length === 0) return;
 
-    function toggleSubtopics(id) {
-      const el = document.getElementById(id);
-      el.style.display = (el.style.display === "block") ? "none" : "block";
-    }
-  </script>
+        const file = this.files[0];
+        const sizeKB = (file.size / 1024).toFixed(2);
+
+        info.innerHTML = `
+            <strong>Tên file:</strong> ${file.name}<br>
+            <strong>Dung lượng:</strong> ${sizeKB} KB
+        `;
+    });
+</script>
+
 </body>
 </html>
